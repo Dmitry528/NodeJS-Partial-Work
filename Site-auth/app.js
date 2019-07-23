@@ -33,9 +33,9 @@ app.use(passport.session());
 //err view
 app.use(flash())
 app.use((req, res, next) => {
-  res.locals.success_mesages = req.flash('success')
-  res.locals.error_messages = req.flash('error')
-  next()
+  res.locals.success_messages = req.flash('success');
+  res.locals.error_messages = req.flash('error');
+  next();
 })
 
 // view engine setup
@@ -74,6 +74,7 @@ app.use(function(err, req, res, next) {
 });
 
 const uri = 'mongodb+srv://admin5:7mbUDDdsqM7h3Vb@cluster0-q5xnz.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.Promise = global.Promise
 mongoose.connect(uri, {useNewUrlParser: true}, (err) => {
   if(err){
     console.log(err);

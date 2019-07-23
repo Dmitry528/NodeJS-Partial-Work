@@ -7,12 +7,15 @@ html(lang="en")
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block header
+     
+    if success_messages
+      .alert.alert-success= success_messages
+    if error_messages
+      .alert.alert-danger= error_messages
 
-    block main
 
-    block footer
+    block content
 
-    block errors
-
+    .container
+      include partials/navbar.pug
     include partials/scripts.pug

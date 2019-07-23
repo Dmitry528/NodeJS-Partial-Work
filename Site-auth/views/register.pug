@@ -1,0 +1,17 @@
+extends layout
+block content
+    .container
+        .row
+            .col-xl-5
+                form.form-signin(action='/users/register', method='POST')
+                    h2.form-signin-heading Please sign up
+                    label.sr-only(for='inputEmail') Email address
+                    input#inputEmail.form-control(type='email', name='email', placeholder='Email address', required='', autofocus='')
+                    label.sr-only(for='inputUsername') Username
+                    input#inputUsername.form-control(type='text', name='username', placeholder='Username', required='')
+                    label.sr-only(for='inputPassword') Password
+                    input#inputPassword.form-control(type='password', name='password', placeholder='Password', required='')
+                    label.sr-only(for='inputConfirmPassword') Confirm Password
+                    input#inputConfirmPassword.form-control(type='password', name='confirmationPassword', placeholder='Confirm Password', required='')
+                    br
+                    button.btn.btn-lg.btn-default.btn-block(type='submit') Sign up

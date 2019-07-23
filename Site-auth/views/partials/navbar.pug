@@ -1,0 +1,17 @@
+.masthead
+    h3.text-muted Site Authentication
+    nav
+        ul.nav.nav-justified
+            li.active
+                a(href='/') Home
+            if isAuthenticated
+                li
+                    a(href="/users/dashboard") Dashboard
+                li 
+                    a(href="users/logout") Logout
+            else
+                li
+                    a(href="/users/register") Sing Up
+                li
+                    a(href="/users/login") Sign In
+                
