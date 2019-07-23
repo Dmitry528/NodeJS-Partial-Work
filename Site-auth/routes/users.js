@@ -45,9 +45,27 @@ router.route('/register')
 
     req.flash('success', 'Registration succesfully');
     res.redirect('/users/login');
-  } catch (error) {
+  } 
+  catch (error) {
     next(error);
   }
 });
+
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
+router.post('/login', (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+
+  User.findOne({email: email})
+  .then((result) => {
+    if(password = result.password){
+      req.flash('success', 'Enter success');
+      res.redirect('/');
+    }
+  })
+})
 
 module.exports = router;
