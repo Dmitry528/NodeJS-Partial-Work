@@ -21,10 +21,16 @@ router.post('/', (req, res) => {
         return    bcrypt.compare(password, user.password)
     })
     .then((samePass) => {
+        console.log(samePass);
         if(!samePass) {
-            res.send("Problem");
+            res.render('login', {
+                errors: 'Incorrect login of password'
+            });
         }
-        res.send('Its Okay');
+        res.redirect('http://localhost:3000/');
+    })
+    .catch((err) =>{
+        console.log(err);
     })
 })
 
@@ -36,29 +42,21 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
 
-    const UserSchema = require('../models/user');
-
     let login = req.body.login;
     let password = req.body.password;
     let repassword = req.body.repassword;
     let email = req.body.email;
+    
+    const UserSchema = require('../models/user')
+    UserSchema.findOne({login: login})
+    .then((result) => {
+        return result;
+    })
+    .then((result) => {
+        console.log(result);
+    })
 
-    UserSchema.hashPassword(password)
-    .then((hashingPassword) => {
-        const CreateUser = new UserSchema({
-            login: login,
-            password: hashingPassword,
-            email: email
-        });
-        CreateUser.save();
-    })
-    .then(() =>{
-        res.redirect('/users');
-    })
-    .catch((err) => {
-        console.log(err);
-        res.redirect('/');
-    })
+
 });
 
 
