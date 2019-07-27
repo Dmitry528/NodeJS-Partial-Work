@@ -1,0 +1,20 @@
+extends layout
+
+block content 
+    h2 Register
+    form(action="/users/register", method="post")
+        label(for="login") Login 
+        input(type="text", name="login", placeholder="Login", required)
+        br
+        label(for="password") Password 
+        input(type="password", name="password", placeholder="Password" required)
+        br
+        label(for="repassword") Password 
+        input(type="password", name="repassword", placeholder="RePassword" required)
+        br
+        label(for="Email") Email
+        input(type="email", name="email", placeholder="email" required)
+        br
+        button(type="submit") Submit
+
+        p.flash #{error}

@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h2 Sign In
+    form(action="/users", method="post")
+        label(for="login") Login 
+        input(type="text", name="login", placeholder="Login", required)
+        br
+        label(for="password") Password 
+        input(type="password", name="password", placeholder="Password" required)
+        br
+        button(type="submit") Submit
+    if errors
+        p #{errors}
