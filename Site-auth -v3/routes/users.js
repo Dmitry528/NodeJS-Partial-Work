@@ -30,13 +30,21 @@ router.post('/register', async (req, res) => {
     try {
         const checkEmail = await User.findOne({email: email})
         if(checkEmail){
-            console.log('Email is already use');
+            // console.log('Email is already use');
+            // return;
+            res.render('register', {
+                errors: 'Email is already used'
+            });
             return;
         }
         const checkName = await User.findOne({login: login})
         if(checkName){
-            console.log('Login is already use'); // create error on flash
-            return; // redirect to this page
+            //console.log('Login is already use'); // create error on flash
+            //return; // redirect to this page
+            res.render('register', {
+                errors: 'Name is already used'
+            });
+            return;
         }
        await bcrypt.hash(password, 10)
         .then((hashPass) => {
@@ -47,6 +55,7 @@ router.post('/register', async (req, res) => {
             });
             createUser.save();
             console.log('Saved');
+            res.redirect('/users');
         })
     } 
     catch (error) {

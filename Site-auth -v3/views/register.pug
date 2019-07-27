@@ -17,4 +17,5 @@ block content
         br
         button(type="submit") Submit
 
-        p.flash #{error}
+        if errors
+            p #{errors}
