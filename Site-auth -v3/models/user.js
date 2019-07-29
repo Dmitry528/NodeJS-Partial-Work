@@ -5,11 +5,15 @@ const bcrypt = require('bcryptjs');
 const user = new schema({
     login: {
         type: String,
-        required: true
+        required: true,
+        min: 4,
+        max: 12
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        min: 6,
+        max: 12
     },
     email: {
         type: String,

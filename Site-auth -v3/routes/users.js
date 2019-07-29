@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var bcrypt = require('bcryptjs');
+var { check, validationResult } = require('express-validator'); // Use This variant
+
+const myValidationResult = validationResult.withDefaults({
+    formatter: (error) => {
+      return {
+        Errors: error.msg,
+      };
+    }
+  });
 
 const User = require('../models/user');
 
@@ -13,6 +21,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     let login = req.body.login;
     let password = req.body.password;
+    // check('login').isEmpty(); // Use This variant
 })
 
 router.get('/register', (req, res) => {
@@ -46,7 +55,7 @@ router.post('/register', async (req, res) => {
             });
             return;
         }
-       await bcrypt.hash(password, 10)
+       await User.hashPassword(password)
         .then((hashPass) => {
             let createUser = new User({
                 login: login,
@@ -59,7 +68,9 @@ router.post('/register', async (req, res) => {
         })
     } 
     catch (error) {
-        
+        res.render('/users/register', {
+            errors: errors
+        })
     }
 });
 
