@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  const userShema = require('../models/user.model');
+  userShema.find({})
+  .then((result) => {
+    res.send(result);
+  })
 });
 
 module.exports = router;

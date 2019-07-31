@@ -42,20 +42,42 @@ const validation = (req, res, next) => {
   let login = req.body.login;
   let password = req.body.password;
   let email = req.body.email;
-  const UserSchema = require('../models/user.model')
+
+
+   const UserSchema = require('../models/user.model');
+
+
+
+  let CreateUser = new UserSchema({
+    login: login,
+    password: password,
+    email: email
+  });
+
+  CreateUser.save((err, saved) => {
+    if(err){
+      //res.send({error: err.message});
+      res.render('index', {msg: err.message});
+    }
+    else{
+      console.log('Saved DATA INTO DB', saved);
+      next();
+    }
+  })
   
   // Joi validate MongoSchema 
   // hash password
   // next save data into DB
 
+  // try joigoose
 
-  //next();
+
 }
 
 
 router.post('/', reg, validation ,(req, res) => { // auth = midleware 1) auth then / post
   
-  console.log('Validation is okay, we are on \' / \' route ');
+  res.redirect('http://localhost:3000/users');
 });
 
 module.exports = router;
