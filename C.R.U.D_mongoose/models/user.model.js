@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 
 const NewUser = new Schema({
@@ -12,8 +12,8 @@ const NewUser = new Schema({
     },
     password: {
         required: true,
-        minlength: 4,
-        maxlength: 16,
+        //minlength: 4, Joi must do it
+        //maxlength: 16, Joi must do it
         type: String
     },
     email: {
