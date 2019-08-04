@@ -57,10 +57,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+mongoouse.Promise = global.Promise;
 
 mongoouse.connect('mongodb+srv://admin5:7mbUDDdsqM7h3Vb@cluster0-q5xnz.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true} ,(err) => {
   if (err) console.log(err);
   console.log('Conected to DB');
 });
 
+mongoouse.Promise = global.Promise;
 module.exports = app;

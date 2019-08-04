@@ -25,59 +25,76 @@ const reg =(req, res, next)=>{
           next(); 
         }
         else{
-          console.log('Login is not free'); // Create User Error
-          res.render('index', {msg: "Login is not free"}); // error UI
+          console.log('Login is not free');
+          res.render('index', {msg: "Login is not free"});
         }
       })
     }
     else{
-      console.log('Email is not free'); // Create User Error
-      res.render('index', {msg: "Email is not free"}); // error UI
+      console.log('Email is not free');
+      res.render('index', {msg: "Email is not free"});
     }
   })
 }
 
 const validation = (req, res, next) => {
-  //console.log('In This Middleware i must create validation');
   let login = req.body.login;
   let password = req.body.password;
   let email = req.body.email;
 
-
-   const UserSchema = require('../models/user.model');
-
-
-
-  let CreateUser = new UserSchema({
-    login: login,
-    password: password,
-    email: email
-  });
-
-  CreateUser.save((err, saved) => {
+  bcrypt.hash(password, 10, (err, hash) => {
     if(err){
-      //res.send({error: err.message});
-      res.render('index', {msg: err.message});
+      console.log(err);
     }
     else{
-      console.log('Saved DATA INTO DB', saved);
-      next();
+       const UserSchema = require('../models/user.model');
+
+      const CreateUser = new UserSchema({
+        login: login,
+        password: hash,
+        email: email,
+      });
+      CreateUser.save((err, result) => {
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log('Saved', result);
+        }
+      })
     }
   })
   
-  // Joi validate MongoSchema 
-  // hash password
-  // next save data into DB
+  // const UserSchema = require('../models/user.model');
 
-  // try joigoose
+  // const CreateUser = new UserSchema({
+  //   login: login,
+  //   password: password,
+  //   email: email,
+  // });
 
+  // CreateUser.save((err, result) => {
+  //   if(err){
+  //     console.log(err);
+  //   }
+  //   else{
+  //     console.log("Dava Saved" + result);
+  //   }
+  // })
 
 }
 
 
-router.post('/', reg, validation ,(req, res) => { // auth = midleware 1) auth then / post
-  
+router.post('/', reg, validation, (req, res) => { // auth = midleware 1) auth then / post
   res.redirect('http://localhost:3000/users');
 });
 
 module.exports = router;
+
+// create auth
+// create yours errors in Schema
+// Pretty time in mongo
+// hash min 8 is not working
+// first validate Joi then write Schema then save into DB
+// WATCH VIDEO MOTHERFUCKER
+// When hash password (how before validation)
