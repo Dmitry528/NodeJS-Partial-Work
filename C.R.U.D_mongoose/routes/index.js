@@ -92,9 +92,11 @@ router.post('/', reg, validation, (req, res) => { // auth = midleware 1) auth th
       })
     }
   })
-  res.redirect('http://localhost:3000/users');
+  res.redirect('http://localhost:3000/signIn');
 });
 
 module.exports = router;
 
+// Authorization
 // Pretty time in mongo
+// JWT TOKEN
