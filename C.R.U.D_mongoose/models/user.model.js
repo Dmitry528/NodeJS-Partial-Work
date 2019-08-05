@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
+const date = require('date-and-time');
+const now = new Date();
+
 
 
 const NewUser = new Schema({
@@ -22,7 +25,7 @@ const NewUser = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: date.format(now, 'ddd., MMM. DD YYYY')
     },
 }, {
     versionKey: false
