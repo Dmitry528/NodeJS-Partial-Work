@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const date = require('date-and-time');
 const now = new Date();
-
+const moment = date.format(now, 'ddd., MMM. DD YYYY');
+console.log(moment);
 
 
 const NewUser = new Schema({
@@ -15,8 +16,8 @@ const NewUser = new Schema({
     },
     password: {
         required: true,
-        minlength: 4,
-        maxlength: 16,
+        //minlength: 4, Joi must do it
+        //maxlength: 16, Joi must do it
         type: String
     },
     email: {
@@ -24,8 +25,8 @@ const NewUser = new Schema({
         required: true
     },
     createdAt: {
-        type: Date,
-        default: date.format(now, 'ddd., MMM. DD YYYY')
+        type: String,
+        default: moment
     },
 }, {
     versionKey: false
