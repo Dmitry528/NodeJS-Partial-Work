@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express'});
 });
 
-const reg =(req, res, next)=>{
+const reg =(req, res, next) => {
   let login = req.body.login;
   let password = req.body.password;
   let email = req.body.email;
@@ -45,7 +45,7 @@ const validation = (req, res, next) => {
   //joi
   const JoiSchema = Joi.object().keys({
     login: Joi.string().alphanum().min(4).max(16).required(),
-    password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).min(6).max(12),
+    password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).min(6).max(16),
     email: Joi.string().email()
   })
   const result = Joi.validate({
@@ -97,6 +97,4 @@ router.post('/', reg, validation, (req, res) => { // auth = midleware 1) auth th
 
 module.exports = router;
 
-// Authorization
-// Pretty time in mongo
 // JWT TOKEN
