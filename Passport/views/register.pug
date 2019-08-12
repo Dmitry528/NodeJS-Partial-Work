@@ -1,3 +1,23 @@
 extends layout
 
 block content
+    include includes/header.pug
+    .container.regForm
+        .row.registerRoot
+            .col-xl-6
+                h2 Register Page
+                form(action="/register", method="post")
+                    .form-group
+                        label(for='exampleInputEmail1') Email address
+                        input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email', name="email", required)
+                        .form-group
+                            label(for='Username') Username
+                            input#Username.form-control(type='text' placeholder='Username', name='username', required)
+                        .form-group
+                            label(for='exampleInputPassword1') Password
+                            input#exampleInputPassword1.form-control(type='password' placeholder='Password', name='password', required)
+                        .form-group
+                            label(for='exampleInputPassword2') Repeat password
+                            input#exampleInputPassword2.form-control(type='password' placeholder='Repeat password', name='repassword', required)
+                        button.btn.btn-primary(type='submit') Submit
+

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res, next) {
-    res.render('signIn');
-});
+const signIn_controller = require('../controllers/signIn.controller');
+
+router.get('/', signIn_controller.signIn_page_get);
 
 module.exports = router;

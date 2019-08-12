@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
@@ -40,6 +41,15 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+mongoose.connect('mongodb+srv://admin5:7mbUDDdsqM7h3Vb@cluster0-q5xnz.mongodb.net/MVC_app?retryWrites=true&w=majority', {useNewUrlParser: true}, (err) => {
+  if(err){
+    console.log(err);
+  }
+  else{
+    console.log('Connect to db');
+  }
 });
 
 module.exports = app;
