@@ -20,4 +20,8 @@ block content
                             label(for='exampleInputPassword2') Repeat password
                             input#exampleInputPassword2.form-control(type='password' placeholder='Repeat password', name='repassword', required)
                         button.btn.btn-primary(type='submit') Submit
+                if message
+                    p.error #{message}
+                if linkRedirect
+                    p.successfullyReg REGISTRATION IS SUCCESSFULLY PLEASE SIGN IN
 
